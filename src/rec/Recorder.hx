@@ -55,8 +55,12 @@ class Recorder {
 		data.push(color);
 	}
 
+	static var lastColor:Color;
+
 	public static function setColor(color:Color):Void {
 		if (!isActive || !inFrame) return;
+		if (color == lastColor) return;
+		lastColor = color;
 		data.push(SetColor);
 		if (color == null) throw "null color";
 		data.push(color);

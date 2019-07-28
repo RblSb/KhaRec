@@ -852,6 +852,8 @@ class Graphics2 extends kha.graphics2.Graphics {
 	}
 
 	public override function drawRect(x: Float, y: Float, width: Float, height: Float, strength: Float = 1.0): Void {
+		Recorder.transformation(transformation);
+		Recorder.drawRect(x, y, width, height, strength);
 		imagePainter.end();
 		textPainter.end();
 
@@ -881,6 +883,8 @@ class Graphics2 extends kha.graphics2.Graphics {
 	}
 
 	public override function fillRect(x: Float, y: Float, width: Float, height: Float): Void {
+		Recorder.transformation(transformation);
+		Recorder.fillRect(x, y, width, height);
 		imagePainter.end();
 		textPainter.end();
 
@@ -919,6 +923,8 @@ class Graphics2 extends kha.graphics2.Graphics {
 	}
 
 	public override function drawLine(x1: Float, y1: Float, x2: Float, y2: Float, strength: Float = 1.0): Void {
+		Recorder.transformation(transformation);
+		Recorder.drawLine(x1, y1, x2, y2, strength);
 		imagePainter.end();
 		textPainter.end();
 
@@ -941,6 +947,8 @@ class Graphics2 extends kha.graphics2.Graphics {
 	}
 
 	public override function fillTriangle(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float) {
+		Recorder.transformation(transformation);
+		Recorder.fillTriangle(x1, y1, x2, y2, x3, y3);
 		imagePainter.end();
 		textPainter.end();
 

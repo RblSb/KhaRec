@@ -98,22 +98,23 @@ class Player {
 					final imgIndex = cast get();
 					var img = imageMap[imgIndex];
 					if (img == null) img = atlas;
-					final x = get();
-					final y = get();
-					g.drawImage(img, x, y);
+					g.drawImage(img, get(), get());
 				case DrawScaledSubImage:
 					final imgIndex = cast get();
 					var img = imageMap[imgIndex];
 					if (img == null) img = atlas;
-					final sx = get();
-					final sy = get();
-					final sw = get();
-					final sh = get();
-					final dx = get();
-					final dy = get();
-					final dw = get();
-					final dh = get();
-					g.drawScaledSubImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+					g.drawScaledSubImage(
+						img, get(), get(), get(), get(),
+						get(), get(), get(), get()
+					);
+				case DrawRect:
+					g.drawRect(get(), get(), get(), get(), get());
+				case FillRect:
+					g.fillRect(get(), get(), get(), get());
+				case DrawLine:
+					g.drawLine(get(), get(), get(), get(), get());
+				case FillTriangle:
+					g.fillTriangle(get(), get(), get(), get(), get(), get());
 				case End:
 					g.end();
 				case FrameEnd:

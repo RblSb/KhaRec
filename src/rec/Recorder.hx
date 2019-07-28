@@ -48,14 +48,14 @@ class Recorder {
 		inFrame = false;
 	}
 
-	public static function begin(color: Color):Void {
+	public static function begin(color:Color):Void {
 		if (!isActive || !inFrame) return;
 		data.push(Begin);
 		if (color == null) color = 0xFF000000;
 		data.push(color);
 	}
 
-	public static function setColor(color: Color):Void {
+	public static function setColor(color:Color):Void {
 		if (!isActive || !inFrame) return;
 		data.push(SetColor);
 		if (color == null) throw "null color";
@@ -64,7 +64,7 @@ class Recorder {
 
 	static var lastMatrix = FastMatrix3.identity();
 
-	public static function transformation(m: FastMatrix3):Void {
+	public static function transformation(m:FastMatrix3):Void {
 		if (!isActive || !inFrame) return;
 		final t = lastMatrix;
 		if (t._00 == m._00 && t._10 == m._10 && t._20 == m._20 &&
@@ -83,7 +83,47 @@ class Recorder {
 		data.push(m._22);
 	}
 
-	public static function drawImage(img: kha.Image, x: FastFloat, y: FastFloat):Void {
+	public static function drawRect(x:Float, y:Float, w:Float, h:Float, strength:Float):Void {
+		if (!isActive || !inFrame) return;
+		data.push(DrawRect);
+		data.push(x);
+		data.push(y);
+		data.push(w);
+		data.push(h);
+		data.push(strength);
+	}
+
+	public static function fillRect(x:Float, y:Float, w:Float, h:Float):Void {
+		if (!isActive || !inFrame) return;
+		data.push(FillRect);
+		data.push(x);
+		data.push(y);
+		data.push(w);
+		data.push(h);
+	}
+
+	public static function drawLine(x:Float, y:Float, x2:Float, y2:Float, strength:Float):Void {
+		if (!isActive || !inFrame) return;
+		data.push(DrawLine);
+		data.push(x);
+		data.push(y);
+		data.push(x2);
+		data.push(y2);
+		data.push(strength);
+	}
+
+	public static function fillTriangle(x:Float, y:Float, x2:Float, y2:Float, x3:Float, y3:Float):Void {
+		if (!isActive || !inFrame) return;
+		data.push(FillTriangle);
+		data.push(x);
+		data.push(y);
+		data.push(x2);
+		data.push(y2);
+		data.push(x3);
+		data.push(y3);
+	}
+
+	public static function drawImage(img:Image, x:FastFloat, y:FastFloat):Void {
 		if (!isActive || !inFrame) return;
 		data.push(DrawImage);
 		data.push(imageMap[img] == null ? -1 : imageMap[img]);
@@ -91,7 +131,7 @@ class Recorder {
 		data.push(y);
 	}
 
-	public static function drawScaledSubImage(img: kha.Image, sx: FastFloat, sy: FastFloat, sw: FastFloat, sh: FastFloat, dx: FastFloat, dy: FastFloat, dw: FastFloat, dh: FastFloat): Void {
+	public static function drawScaledSubImage(img:Image, sx:FastFloat, sy:FastFloat, sw:FastFloat, sh:FastFloat, dx:FastFloat, dy:FastFloat, dw:FastFloat, dh:FastFloat):Void {
 		if (!isActive || !inFrame) return;
 		data.push(DrawScaledSubImage);
 		data.push(imageMap[img] == null ? -1 : imageMap[img]);
@@ -113,8 +153,8 @@ class Recorder {
 	public static function save():Void {
 		isActive = false;
 		final bin = data.toString();
-		final bin = untyped pako.deflate(bin, {to: 'string'});
 		#if kha_html5
+		final bin = untyped pako.deflate(bin, {to:'string'});
 		final blob = new js.html.Blob([bin], {
 			type: "application/octet-stream"
 		});

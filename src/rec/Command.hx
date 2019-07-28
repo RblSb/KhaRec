@@ -9,6 +9,10 @@ enum abstract Command(Int) to FastFloat {
 	var Transformation;
 	var DrawImage;
 	var DrawScaledSubImage;
+	var DrawRect;
+	var FillRect;
+	var DrawLine;
+	var FillTriangle;
 	var End;
 	var FrameEnd;
 }

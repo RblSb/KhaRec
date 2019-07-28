@@ -9,7 +9,7 @@ Only for fun, html5 and g2 on g4.
 
 ### Usage
 
-First of all, add [pako.min.js](https://raw.githubusercontent.com/hamaluik/haxe-pako/master/libs/pako.min.js) to `Assets` and to [index.html](https://github.com/Kode/Kha/wiki/HTML5#custom-indexhtml-and-js-libraries). 30s 60fps record with pako compression will have 2 MB size for 1k draws in a frame. Don't ask how fat it can be without compression.
+First of all, add [pako.min.js](https://raw.githubusercontent.com/hamaluik/haxe-pako/master/libs/pako.min.js) to `Assets` and to [index.html](https://github.com/Kode/Kha/wiki/HTML5#custom-indexhtml-and-js-libraries). 30s 60fps record with pako compression can have 900 kb size for one million graphic commands. Don't ask how fat it can be without compression.
 
 Lets add code in game for Recorder/Player activation in `onKeyDown` event:
 ```haxe

@@ -37,7 +37,7 @@ if (rec.Player.isActive) {
 }
 ```
 And code for `Recorder` in render loop:
-```
+```haxe
 final g = framebuffer.g2;
 rec.Recorder.frameBegin(g);
 // actual render code
